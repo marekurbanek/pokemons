@@ -3,6 +3,7 @@ import { trpc } from "@/utils/trpc";
 import { getOptionsForVote } from "@/utils/getRandomPokemon";
 import { useState } from "react";
 import { inferQueryResponse } from "./api/trpc/[trpc]";
+import Image from "next/image";
 
 const btnClass =
   "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full";
@@ -25,7 +26,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col justify-center items-center">
+    <div className="h-screen w-screen flex flex-col justify-center items-center relative">
       <div className="text-2xl text-center">Which Pokemon is rounder?</div>
       <div className="p-2"></div>
       <div className="border rounded p-8 flex justify-between max-w-2xl items-center">
@@ -61,9 +62,12 @@ const PokemonListing: React.FC<{
 }> = (props) => {
   return (
     <div className="flex flex-col">
-      <img
+      <Image
         className="w-64 h-64"
-        src={props.pokemon.sprites.front_default || undefined}
+        width={256}
+        height={256}
+        src={props.pokemon.sprites.front_default || ""}
+        layout="fixed"
       />
       <div className="text-xl text-center capitalize mt-[-2rem]">
         {props.pokemon.name}
