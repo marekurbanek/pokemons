@@ -4,6 +4,7 @@ import { getOptionsForVote } from "@/utils/getRandomPokemon";
 import { useState } from "react";
 import { inferQueryResponse } from "./api/trpc/[trpc]";
 import Image from "next/image";
+import Link from "next/link";
 
 const btnClass =
   "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full";
@@ -47,6 +48,11 @@ const Home: NextPage = () => {
             </>
           )}
         <div className="p-8"></div>
+      </div>
+      <div className="absolute bottom-0 w-full text-xl text-center p-4">
+        <Link href="/results">
+          <a>Reuslts</a>
+        </Link>
       </div>
     </div>
   );
