@@ -5,18 +5,28 @@ import Image from "next/image";
 
 type PokemonQueryResult = AsyncReturnType<typeof getPokemonOrdered>;
 
+const generateCountPercent = (pokemon: PokemonQueryResult[number]) => {
+  const { VotesFor, VoteAgainst } = pokemon._count;
+  if (VotesFor + VoteAgainst === 0) return 0;
+
+  return (VotesFor / (VotesFor + VoteAgainst)) * 100;
+};
+
 const PokemonListing: React.FC<{ pokemon: PokemonQueryResult[number] }> = (
   props
 ) => {
   return (
-    <div className="flex border-b p-2 items-center">
-      <Image
-        width={64}
-        height={64}
-        src={props.pokemon.spriteUrl}
-        layout="fixed"
-      />
-      <div className="capitalize">{props.pokemon.name}</div>
+    <div className="flex border-b p-2 items-center justify-between">
+      <div className="flex items-center">
+        <Image
+          width={64}
+          height={64}
+          src={props.pokemon.spriteUrl}
+          layout="fixed"
+        />
+        <div className="capitalize">{props.pokemon.name}</div>
+      </div>
+      <div>{generateCountPercent(props.pokemon)}%</div>
     </div>
   );
 };
